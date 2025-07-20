@@ -57,5 +57,6 @@ function App() {
     </div>
   );
 }
+["UserContext", "UserContext.Provider", "value"]
 
 export default App;
