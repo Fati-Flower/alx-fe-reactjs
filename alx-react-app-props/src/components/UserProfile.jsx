@@ -1,13 +1,14 @@
-import UserProfile from './UserProfile';
+// src/components/UserProfile.jsx
 
-function ProfilePage() {
-  return (
-    <UserProfile
-      name="Jane Doe"
-      age="30"
-      bio="Frontend developer who loves coffee and coding."
-    />
-  );
-}
-
-export default ProfilePage;
+const UserProfile = (props) => {
+    return (
+      <div>
+        <h2>{props.name}</h2>
+        <p>Age: {props.age}</p>
+        <p>Bio: {props.bio}</p>
+      </div>
+    );
+  };
+  
+  export default UserProfile;
+  
