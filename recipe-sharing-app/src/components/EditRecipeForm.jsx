@@ -15,7 +15,7 @@ const EditRecipeForm = ({ recipe }) => {
     <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
       <h3>Edit Recipe</h3>
       <input
-        type="text"
+        type="event.preventDefault"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
