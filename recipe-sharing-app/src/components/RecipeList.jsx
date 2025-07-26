@@ -16,6 +16,9 @@ const RecipeList = () => {
               <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
             </h3>
             <p>{recipe.description.slice(0, 100)}...</p>
+
+            <FavoriteButton recipeId={recipe.id} />
+
           </div>
         ))
       )}
