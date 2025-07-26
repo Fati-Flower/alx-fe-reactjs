@@ -1,47 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-// ✅ Add these two imports
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Home() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
+    <div>
+      <h2>🍽️ Welcome to the Recipe Sharing App</h2>
+      <RecipeList />
+    </div>
+  )
+}
 
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+function AddRecipe() {
+  return (
+    <div>
+      <h2>Add a New Recipe</h2>
+      <AddRecipeForm />
+    </div>
+  )
+}
 
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+function NotFound() {
+  return <h2>404 - Page Not Found</h2>
+}
 
-      {/* ✅ Recipe Sharing App section */}
+function App() {
+  return (
+    <Router>
       <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
-        <h2>🍽️ Recipe Sharing App</h2>
-        <AddRecipeForm />
-        <RecipeList />
+        <h1>🍲 Recipe App</h1>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add" element={<AddRecipe />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   )
 }
 
