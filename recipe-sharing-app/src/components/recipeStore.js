@@ -1,20 +1,55 @@
 import { create } from 'zustand';
 
-export const useRecipeStore = create((set) => ({
+export const useRecipeStore = create((set, get) => ({
   recipes: [],
+  searchTerm: '',
+  filteredRecipes: [],
+
   addRecipe: (newRecipe) =>
-    set((state) => ({
-      recipes: [...state.recipes, newRecipe],
-    })),
+    set((state) => {
+      const updatedRecipes = [...state.recipes, newRecipe];
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: filter(updatedRecipes, state.searchTerm),
+      };
+    }),
+
   deleteRecipe: (id) =>
-    set((state) => ({
-      recipes: state.recipes.filter((recipe) => recipe.id !== id),
-    })),
+    set((state) => {
+      const updatedRecipes = state.recipes.filter((r) => r.id !== id);
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: filter(updatedRecipes, state.searchTerm),
+      };
+    }),
+
   updateRecipe: (updatedRecipe) =>
+    set((state) => {
+      const updatedRecipes = state.recipes.map((r) =>
+        r.id === updatedRecipe.id ? updatedRecipe : r
+      );
+      return {
+        recipes: updatedRecipes,
+        filteredRecipes: filter(updatedRecipes, state.searchTerm),
+      };
+    }),
+
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+    const filtered = filter(get().recipes, term);
+    set({ filteredRecipes: filtered });
+  },
+
+  setRecipes: (recipes) =>
     set((state) => ({
-      recipes: state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
-      ),
+      recipes,
+      filteredRecipes: filter(recipes, state.searchTerm),
     })),
-  setRecipes: (recipes) => set({ recipes }),
 }));
+
+// 🔍 Filtering helper function
+function filter(recipes, term) {
+  return recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(term.toLowerCase())
+  );
+}
