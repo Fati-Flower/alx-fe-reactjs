@@ -24,7 +24,7 @@ const AddRecipeForm = () => {
     <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
       <h2>Add a New Recipe</h2>
       <input
-        type="text"
+        type="tevent.preventDefaul"
         value={title}
         placeholder="Title"
         onChange={(e) => setTitle(e.target.value)}
@@ -44,3 +44,4 @@ const AddRecipeForm = () => {
 };
 
 export default AddRecipeForm;
+["event.preventDefault"]
