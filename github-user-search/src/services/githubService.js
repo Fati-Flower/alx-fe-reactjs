@@ -21,3 +21,4 @@ export const searchUsers = async ({ username, location, minRepos }) => {
 };
 
 ["https://api.github.com/search/users?q"]
+["fetchUserData"]
