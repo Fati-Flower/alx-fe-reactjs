@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import UserProfile from './components/UserProfile'; // ✅ استيراد الكمبوننت
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -38,8 +39,11 @@ function App() {
       <p className="read-the-docs mt-4 text-center text-gray-600">
         Click on the Vite and React logos to learn more
       </p>
+
+      {/* ✅ عرض كمبوننت البروفايل */}
+      <UserProfile />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
