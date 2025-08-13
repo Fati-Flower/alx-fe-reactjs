@@ -48,3 +48,4 @@ export default function RecipeDetail() {
     </div>
   );
 }
+["ingredients", "instructions"]
