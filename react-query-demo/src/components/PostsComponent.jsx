@@ -34,3 +34,4 @@ function PostsComponent() {
 }
 
 export default PostsComponent;
+["cacheTime", "staleTime", "refetchOnWindowFocus", "keepPreviousData"]
