@@ -7,28 +7,49 @@ function RegistrationForm() {
     password: "",
   });
 
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear the error for the field while typing
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!formData.username || !formData.email || !formData.password) {
-      setError("All fields are required!");
+    let hasError = false;
+    const newErrors = { username: "", email: "", password: "" };
+
+    // Validation checks
+    if (!formData.username) {
+      newErrors.username = "Username is required";
+      hasError = true;
+    }
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+      hasError = true;
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
       return;
     }
 
-    setError("");
-
     try {
-      // Mock API request (simulate)
+      // Mock API request
       const response = await fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,9 +59,11 @@ function RegistrationForm() {
       const data = await response.json();
       console.log("User registered:", data);
       alert("User registered successfully!");
+      // Reset form after successful submission
+      setFormData({ username: "", email: "", password: "" });
     } catch (error) {
       console.error("Error:", error);
-      setError("Registration failed!");
+      alert("Registration failed!");
     }
   };
 
@@ -51,8 +74,6 @@ function RegistrationForm() {
     >
       <h2 className="text-xl font-bold">User Registration (Controlled)</h2>
 
-      {error && <p className="text-red-500">{error}</p>}
-
       <div>
         <label className="block mb-1">Username</label>
         <input
@@ -62,6 +83,7 @@ function RegistrationForm() {
           onChange={handleChange}
           className="w-full border px-2 py-1 rounded"
         />
+        {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
       </div>
 
       <div>
@@ -73,6 +95,7 @@ function RegistrationForm() {
           onChange={handleChange}
           className="w-full border px-2 py-1 rounded"
         />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
       </div>
 
       <div>
@@ -84,6 +107,7 @@ function RegistrationForm() {
           onChange={handleChange}
           className="w-full border px-2 py-1 rounded"
         />
+        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
       </div>
 
       <button
@@ -97,5 +121,6 @@ function RegistrationForm() {
 }
 
 export default RegistrationForm;
+
 
 ["value={username}", "value={email}", "value={password}"]
