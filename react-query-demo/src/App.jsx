@@ -39,3 +39,5 @@ function App() {
 }
 
 export default App
+
+["QueryClient", "QueryClientProvider", "queryClient", "client={queryClient}"]
