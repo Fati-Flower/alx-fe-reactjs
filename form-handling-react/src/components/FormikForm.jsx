@@ -93,3 +93,5 @@ function FormikForm() {
 }
 
 export default FormikForm;
+
+["value={username}", "value={email}", "value={password}"]
